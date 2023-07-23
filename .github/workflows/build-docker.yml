@@ -7,10 +7,6 @@ on:
         required: true
         type: string
         description: Name of the docker image. ghcr.io/riesinger/ will be prepended to this.
-      git-tag:
-        required: false
-        type: string
-        description: Current git tag. Used to generate semver docker image tags. The latest tag will always be pushed.
       working-directory:
         required: false
         type: string
