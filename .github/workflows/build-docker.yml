@@ -3,10 +3,15 @@ name: Build docker image
 on:
   workflow_call:
     inputs:
+      image-base-name:
+        required: false
+        type: string
+        default: ghcr.io/riesinger
+        description: Base name of the docker image. Defaults to ghcr.io/riesinger
       image-name:
         required: true
         type: string
-        description: Name of the docker image. ghcr.io/riesinger/ will be prepended to this.
+        description: Name of the docker image. The input image-base-name will be prepended to this.
       working-directory:
         required: false
         type: string
@@ -32,7 +37,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/riesinger/${{ inputs.image-name }}
+            ${{ inputs.image-base-name }}/${{ inputs.image-name }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
