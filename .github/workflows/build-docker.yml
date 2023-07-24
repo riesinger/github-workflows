@@ -17,6 +17,11 @@ on:
         type: string
         description: Directory to run the docker build command in. Defaults to the root of the repository.
         default: .
+      platforms:
+        required: false
+        type: string
+        description: Platforms to build for. Defaults to linux/amd64,linux/arm64,linux/arm/v7
+        default: linux/amd64,linux/arm64,linux/arm/v7
 
 jobs:
   build:
@@ -59,3 +64,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: ${{ inputs.platforms }}
